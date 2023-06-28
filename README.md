@@ -225,3 +225,38 @@ For more questions/discussions feel free to stop by **#nanoGPT** on Discord:
 ## acknowledgements
 
 All nanoGPT experiments are powered by GPUs on [Lambda labs](https://lambdalabs.com), my favorite Cloud GPU provider. Thank you Lambda labs for sponsoring nanoGPT!
+
+## My own experiments
+### Weight tying
+With weight tying
+- number of parameters: 123.59M
+- https://wandb.ai/bigz/owt/runs/4ytuh9g9/overview?workspace=user-zanqi-liang
+- Train loss	6.066522121429443
+- Val loss	    6.204975605010986
+
+Without weight tying
+- number of parameters: 162.22M
+- https://wandb.ai/bigz/owt/runs/ldbb2hjn?workspace=user-zanqi-liang
+- Train loss	6.004483222961426
+- Val loss	    6.144636154174805
+
+With weight tying, we reduce the number of parameters by 38.63M (24%), but the loss is only a little higher.
+
+### Continue training
+Without continue training, out of the box gpt2 result:
+```
+$ python3 train.py config/eval_gpt2.py --device=mps --compile=False
+train loss 3.1089, val loss 3.0959
+```
+
+With continue training
+```
+$ python3 train.py config/finetune_owt.py --compile=False --eval_iters=20 --device=mps --max_iters=6000 --
+gradient_accumulation_steps=1 --batch_size=1
+$ python3 train.py config/eval_gpt2.py --device=mps --compile=False --init_from=resume --out_dir=
+out-owt
+train loss 3.0623, val loss 3.0538
+```
+
+### debug command
+`-m debugpy --listen 5678 --wait-for-client`
