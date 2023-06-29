@@ -227,6 +227,10 @@ For more questions/discussions feel free to stop by **#nanoGPT** on Discord:
 All nanoGPT experiments are powered by GPUs on [Lambda labs](https://lambdalabs.com), my favorite Cloud GPU provider. Thank you Lambda labs for sponsoring nanoGPT!
 
 ## My own experiments
+
+### M2 pytorch
+Install pytorch with this command instead:
+`pip install --pre torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/nightly/cpu`
 ### Weight tying
 With weight tying
 - number of parameters: 123.59M
