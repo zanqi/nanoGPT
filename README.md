@@ -263,4 +263,4 @@ train loss 3.0623, val loss 3.0538
 ```
 
 ### debug command
-`-m debugpy --listen 5678 --wait-for-client`
+-m debugpy --listen 5678 --wait-for-client
